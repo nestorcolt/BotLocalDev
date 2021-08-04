@@ -1,16 +1,17 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CloudLibrary.Controllers;
+using CloudLibrary.Lib;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
-using CloudLibrary.Controllers;
-using CloudLibrary.Lib;
 using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace LocalTest.Test
 {
     class GetUserBlocks
     {
-        private string _userId = "5";
+        private string _userId = "9";
 
         public void Run(IHost host)
         {
@@ -21,7 +22,7 @@ namespace LocalTest.Test
             string userData = DynamoHandler.QueryUser(_userId).Result;
             UserDto userDto = JsonConvert.DeserializeObject<UserDto>(userData);
             userDto.TimeZone = "Eastern Standard Time";
-            userDto.MinimumPrice = 10000;
+            userDto.MinimumPrice = 1000000;
 
             while (true)
             {
